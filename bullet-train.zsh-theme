@@ -306,11 +306,11 @@ prompt_segment() {
 # End the prompt, closing any open segments
 prompt_end() {
   if [[ -n $CURRENT_BG ]]; then
-    echo -n " %{%k%F{$CURRENT_BG}%}$SEGMENT_SEPARATOR"
+    echo -n " %{%K%{$reset_color%}%F{$CURRENT_BG}%}$SEGMENT_SEPARATOR"
   else
     echo -n "%{%k%}"
   fi
-  echo -n "%{%f%}"
+  echo -n "%{%f%}%{$reset_color%}"
   CURRENT_BG=''
 }
 
@@ -433,13 +433,13 @@ prompt_dir() {
 
   if [[ $BULLETTRAIN_DIR_EXTENDED == 0 ]]; then
     #short directories
-    dir="${dir}%1~"
+    dir="${dir}%1~ "
   elif [[ $BULLETTRAIN_DIR_EXTENDED == 2 ]]; then
     #long directories
-    dir="${dir}%0~"
+    dir="${dir}%0~ "
   else
     #medium directories (default case)
-    dir="${dir}%4(c:...:)%3c"
+    dir="${dir}%4(c:...:)%3c "
   fi
 
   prompt_segment $BULLETTRAIN_DIR_BG $BULLETTRAIN_DIR_FG $dir
